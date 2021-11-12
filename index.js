@@ -130,6 +130,9 @@ class Lambdasian {
   }
 }
 
+const kyler = new Lambdasian('Kyler', 190, 'Panama');
+console.log(kyler.speak());
+
 /*
   TASK 4
     - Write an Instructor class extending Lambdasian.
@@ -146,8 +149,8 @@ class Lambdasian {
 */
 class Instructor extends Lambdasian {
   
-  constructor ({name, age, location, specialty, favLanguage, cathPhrase}) {
-    super({name, age, location, specialty, favLanguage, cathPhrase});
+  constructor (name, age, location, specialty, favLanguage, cathPhrase) {
+    super(name, age, location, specialty, favLanguage, cathPhrase);
     this.specialty = specialty
     this.favLanguage = favLanguage;
     this.cathPhrase = cathPhrase;
@@ -159,6 +162,10 @@ class Instructor extends Lambdasian {
     return `${student.name} receives a perfect score on ${subject}`
   }
 }
+
+const hiemerdinger = new Instructor('Heimerddinger', 200, 'Piltover', 'Hextech', 'CSS and JS', 'This was not in the diagrams!!!');
+console.log(hiemerdinger.demo('Hextech'));
+console.log(hiemerdinger.grade(kyler, 'Hextech'));
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -174,8 +181,22 @@ class Instructor extends Lambdasian {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
-   
+class Student extends Lambdasian {
+  constructor({name, age, location, specialty, favLanguage, cathPhrase, previousBackground, className, favSubjects}) {
+    super({name, age, location, specialty, favLanguage, cathPhrase, previousBackground, className, favSubjects}) 
+    this.previousBackground = previousBackground;
+    this.className = className;
+    this.favSubjects = [];
+  }
+  listSubjects() {
+    return `Loving ${this.favSubjects}`;
+  }
+  PRAssignment(subject) {
+    return `${this.name} has submitted a PR for ${subject}`;
+  }
+  SprintChallenge(subject) {
+    return `${this.name} has begun sprint challenge on ${subject}`;
+  }
 }
 
 /*
@@ -191,8 +212,18 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-   
+class ProjectManager extends Instructor {
+  constructor({name, age, location, specialty, favLanguage, cathPhrase, gradClassName, favInstructor}) {
+    super({name, age, location, specialty, favLanguage, cathPhrase, gradClassName, favInstructor});
+    this.gradClassName = gradClassName;
+    this.favInstructor = favInstructor;
+  }
+  standUp(channel) {
+    return `${this.name} announces to ${channel}, @channel standy times!`;
+  }
+  debugsCode(student, subject) {
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
+  }
 }
 /*
   STRETCH PROBLEM (no tests!)
